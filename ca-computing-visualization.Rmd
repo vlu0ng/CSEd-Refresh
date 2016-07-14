@@ -1,0 +1,38 @@
+---
+title: "Computing Courses in California"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: default
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(leaflet)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### A Visualization of the Computing Courses in California
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
