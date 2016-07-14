@@ -1,6 +1,6 @@
 ---
 title: 'CSEd-Refresh: An Update to the CS Education Landscape in California'
-author: "Vinh Luong"
+author: "Expanding Computing Education Pathways - California"
 date: "July 12, 2016"
 output: html_document
 ---
