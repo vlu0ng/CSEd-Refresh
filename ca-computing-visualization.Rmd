@@ -5,6 +5,9 @@ output:
     theme: default
     orientation: columns
     vertical_layout: fill
+    social: menu
+    source_code: embed
+
 ---
 
 ```{r setup, include=FALSE}
@@ -12,10 +15,20 @@ library(flexdashboard)
 library(leaflet)
 ```
 
-Column {data-width=650}
+#Introduction {.sidebar}
 -----------------------------------------------------------------------
 
-### A Visualization of the Computing Courses in California
+To the right is a visualization of all the computing courese in California.
+
+```{r}
+
+```
+
+
+Column {data-width=650 .tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### CA Computing Courses {data-icon="fa-list"}
 
 ```{r}
 m <- leaflet() %>%
@@ -24,18 +37,10 @@ m <- leaflet() %>%
 m  # Print the map
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
-
-### Chart B
+### Table {data-icon="fa-computer"}
 
 ```{r}
 
 ```
 
-### Chart C
-
-```{r}
-
-```
 
