@@ -1,5 +1,5 @@
 ---
-title: "Computing Courses in California"
+title: "CSEd-Refresh: A Update to the CS Education Landscape in California"
 output: 
   flexdashboard::flex_dashboard:
     theme: default
@@ -31,10 +31,8 @@ Column {data-width=650 .tabset .tabset-fade}
 ### CA Computing Courses {data-icon="fa-list"}
 
 ```{r}
-m <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-m  # Print the map
+m <- leaflet() %>% setView(lng = -71.0589, lat = 42.3601, zoom = 10)
+m %>% addTiles()
 ```
 
 ### Table {data-icon="fa-computer"}
