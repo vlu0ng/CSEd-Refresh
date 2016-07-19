@@ -28,14 +28,14 @@ To the right is a visualization of all the computing courese in California.
 Column {data-width=650 .tabset .tabset-fade}
 -----------------------------------------------------------------------
 
-### CA Computing Courses {data-icon="fa-list"}
+### CA Computing Courses
 
 ```{r}
 m <- leaflet() %>% setView(lng = -71.0589, lat = 42.3601, zoom = 10)
 m %>% addTiles()
 ```
 
-### Table {data-icon="fa-computer"}
+### Data Explorer
 
 ```{r}
 
