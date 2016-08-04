@@ -19,7 +19,7 @@ library(dplyr)
 #Introduction {.sidebar}
 -----------------------------------------------------------------------
 
-To the right is a visualization of all the computing courese in California.
+To the right is a visualization of all the computing courese in California. These courses are identified based on their content. 
 
 ```{r}
 
@@ -32,8 +32,16 @@ Column {data-width=650 .tabset .tabset-fade}
 ### CA Computing Courses
 
 ```{r}
-m <- leaflet() %>% setView(lng = -71.0589, lat = 42.3601, zoom = 10)
-m %>% addTiles()
+donuts <- read.csv("dunkindonuts.csv", stringsAsFactors = FALSE)
+
+m <- leaflet(donuts) %>% 
+  addTiles() %>%
+  setView(-72.690940, 41.651426, zoom = 8) %>%
+  addCircles(~lng, ~lat, popup=donuts$city, weight = 3, radius=40,
+             color="#ffa500", stroke = TRUE, fillOpacity = 0.8) %>%
+  addLegend("bottomright", colors= "#ffa500", labels="Dunkin'", title="In Connecticut")
+
+m
 ```
 
 ### Data Explorer
