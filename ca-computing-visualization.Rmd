@@ -1,5 +1,5 @@
 ---
-title: "CSEd-Refresh: A Update to the CS Education Landscape in California"
+title: "CSEd-Refresh: A Visualization of Computing Courses in California"
 output: 
   flexdashboard::flex_dashboard:
     theme: default
@@ -34,8 +34,8 @@ Column {data-width=650 .tabset .tabset-fade}
 ```{r}
 donuts <- read.csv("dunkindonuts.csv", stringsAsFactors = FALSE)
 
-m <- leaflet(donuts) %>% 
-  addTiles() %>%
+m <- leaflet(donuts) %>%
+  addProviderTiles("CartoDB.Positron") %>%
   setView(-72.690940, 41.651426, zoom = 8) %>%
   addCircles(~lng, ~lat, popup=donuts$city, weight = 3, radius=40,
              color="#ffa500", stroke = TRUE, fillOpacity = 0.8) %>%
