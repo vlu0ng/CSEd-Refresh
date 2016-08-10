@@ -21,7 +21,7 @@ library(readr)
 #Introduction {.sidebar}
 -----------------------------------------------------------------------
 
-To the right is a visualization of all the computing courese in California. These courses are identified based on their content. 
+To the right is a visualization of all the computing courses in California. These courses are identified based on their content. 
 
 ```{r}
 
@@ -34,23 +34,24 @@ Column {data-width=650 .tabset .tabset-fade}
 ### CA Computing Courses
 
 ```{r}
-donuts <- read_csv("dunkindonuts.csv")
+courses <- read.csv("Courses.csv", stringsAsFactors = FALSE)
 
-m <- leaflet(donuts) %>%
+m <- leaflet(courses) %>%
   addProviderTiles("CartoDB.Positron") %>%
   setView(lng = -119.016768, lat = 36.065230, zoom = 7) %>%
-  addCircles(~lng, ~lat, popup = donuts$city, weight = 3, radius=40,
+  addCircles(~lng, ~lat, popup = courses$schoolname, weight = 3, radius=40,
              color="#ffa500", stroke = TRUE, fillOpacity = 0.8) %>%
   addLegend("bottomright", colors = "#ffa500", 
-            labels= "Intro to Computer Science",
-            title="CA Computing Courses")
+            labels = "Intro to Computer Science",
+            title = "CA Computing Courses")
 m
 ```
 
 ### Data Explorer
 
 ```{r}
-courses <- read.csv("CompCourses.csv", stringsAsFactors = FALSE)
+courses <- read.csv("Courses.csv", stringsAsFactors = FALSE)
+
 datatable(
   courses, extensions = 'Buttons', options = list(
     dom = 'Bfrtip',
@@ -59,7 +60,8 @@ datatable(
         extend = 'collection', 
         buttons = c('csv', 'excel', 'pdf'),
         text = 'Download'
-      ))
+      )
+    )
   ))
 ```
 
