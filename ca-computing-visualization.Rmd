@@ -54,7 +54,12 @@ courses <- read.csv("13_14CACompCourses.csv", stringsAsFactors = FALSE)
 datatable(
   courses, extensions = 'Buttons', options = list(
     dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+    buttons = 
+      list('copy', 'print', list(
+        extend = 'collection', 
+        buttons = c('csv', 'excel', 'pdf'),
+        text = 'Download'
+      ))
   ))
 ```
 
