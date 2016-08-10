@@ -50,7 +50,7 @@ m
 ### Data Explorer
 
 ```{r}
-courses <- read.csv("13_14CACompCourses.csv", stringsAsFactors = FALSE)
+courses <- read.csv("CompCourses.csv", stringsAsFactors = FALSE)
 datatable(
   courses, extensions = 'Buttons', options = list(
     dom = 'Bfrtip',
