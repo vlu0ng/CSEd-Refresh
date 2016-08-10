@@ -14,6 +14,8 @@ output:
 library(flexdashboard)
 library(leaflet)
 library(dplyr)
+library(DT)
+library(readr)
 ```
 
 #Introduction {.sidebar}
@@ -32,25 +34,28 @@ Column {data-width=650 .tabset .tabset-fade}
 ### CA Computing Courses
 
 ```{r}
-donuts <- read.csv("dunkindonuts.csv", stringsAsFactors = FALSE)
+donuts <- read_csv("dunkindonuts.csv")
 
 m <- leaflet(donuts) %>%
   addProviderTiles("CartoDB.Positron") %>%
-  setView(-72.690940, 41.651426, zoom = 8) %>%
-  addCircles(~lng, ~lat, popup = donuts$city && donuts$state, weight = 3, radius=40,
+  setView(lng = -119.016768, lat = 36.065230, zoom = 7) %>%
+  addCircles(~lng, ~lat, popup = donuts$city, weight = 3, radius=40,
              color="#ffa500", stroke = TRUE, fillOpacity = 0.8) %>%
   addLegend("bottomright", colors = "#ffa500", 
-            labels = list("Intro to Computer Sciene",
-                          "Exploring Computer Science"), 
+            labels= "Intro to Computer Science",
             title="CA Computing Courses")
-
 m
 ```
 
 ### Data Explorer
 
 ```{r}
-
+courses <- read.csv("13_14CACompCourses.csv", stringsAsFactors = FALSE)
+datatable(
+  courses, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  ))
 ```
 
 
