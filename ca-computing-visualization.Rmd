@@ -34,7 +34,7 @@ Column {data-width=650 .tabset .tabset-fade}
 ### CA Computing Courses
 
 ```{r}
-courses <- read.csv("Courses.csv", stringsAsFactors = FALSE)
+courses <- read_csv("Courses.csv")
 
 m <- leaflet(courses) %>%
   addProviderTiles("CartoDB.Positron") %>%
@@ -50,18 +50,20 @@ m
 ### Data Explorer
 
 ```{r}
-courses <- read.csv("Courses.csv", stringsAsFactors = FALSE)
+courses <- read_csv("Courses.csv")
 
 datatable(
-  courses, extensions = 'Buttons', options = list(
+  courses, extensions = c('Buttons', 'FixedHeader'), caption = "Data source:www.cde.gov",
+  options = list(
     dom = 'Bfrtip',
     buttons = 
       list('copy', 'print', list(
         extend = 'collection', 
         buttons = c('csv', 'excel', 'pdf'),
         text = 'Download'
-      )
-    )
+      )),
+    pageLength = 50,
+    fixedHeader = TRUE
   ))
 ```
 
