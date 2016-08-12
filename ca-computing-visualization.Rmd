@@ -35,14 +35,21 @@ Column {data-width=650 .tabset .tabset-fade}
 
 ```{r}
 courses <- read_csv("Courses.csv")
+topoData <- readLines("caCountiesTopo.json") %>% paste(collapse = "\n")
+qpal <- colorNumeric("RdYlBu", courses$coursecode, n = 13)
 
 m <- leaflet(courses) %>%
   addProviderTiles("CartoDB.Positron") %>%
   setView(lng = -119.016768, lat = 36.065230, zoom = 7) %>%
-  addCircles(~lng, ~lat, popup = courses$schoolname, weight = 3, radius=40,
-             color="#ffa500", stroke = TRUE, fillOpacity = 0.8) %>%
-  addLegend("bottomright", colors = "#ffa500", 
-            labels = "Intro to Computer Science",
+  addTopoJSON(topoData, weight = 1, color = "#444444", fill = FALSE) %>%
+  addCircles(~lng, ~lat, 
+              popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
+                            "District:", courses$districtname, "<br>",
+                            "Course:", courses$coursetitle, "<br>"), 
+              weight = 3, radius = 40,
+              color = ~qpal(coursecode), stroke = TRUE, fillOpacity = 0.8) %>%
+  addLegend("bottomright", colors = c("#ffa500","#ffa800"), 
+            labels = c("Intro to Computer Science","AP CSA"),
             title = "CA Computing Courses")
 m
 ```
@@ -53,15 +60,16 @@ m
 courses <- read_csv("Courses.csv")
 
 datatable(
-  courses, extensions = c('Buttons', 'FixedHeader'), caption = "Data source:www.cde.gov",
+  courses, extensions = c('Buttons', 'FixedHeader'), caption = "Data source:www.cde.gov", 
   options = list(
     dom = 'Bfrtip',
     buttons = 
       list('copy', 'print', list(
         extend = 'collection', 
         buttons = c('csv', 'excel', 'pdf'),
-        text = 'Download'
-      )),
+        text = 'Download'),
+      I('colvis')
+      ),
     pageLength = 50,
     fixedHeader = TRUE
   ))
