@@ -21,7 +21,7 @@ library(readr)
 #Introduction {.sidebar}
 -----------------------------------------------------------------------
 
-To the right is a visualization of all the computing courses in California. These courses were identified based on their content. 
+To the right is a visualization of all the computing courses in high schools throughout California. These courses were identified based on their content. 
 
 ```{r}
 
@@ -36,6 +36,9 @@ Column {data-width=650 .tabset .tabset-fade}
 ```{r}
 courses <- read_csv("Courses.csv")
 topoData <- readLines("caCountiesTopo.json") %>% paste(collapse = "\n")
+popup_info <- paste("<b>School:</b>", courses$schoolname, "<br>", 
+                    "<b>District</b>:", courses$districtname, "<br>",
+                    "<b>Course</b>:", courses$coursetitle, "<br>")
 
 m <- leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
@@ -71,90 +74,70 @@ m <- leaflet() %>%
   
   #Markers for 2465 IB Computer Science
   addCircles(data = dplyr::filter(courses,coursecode == "2465"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#33a02c", stroke = TRUE, fillOpacity = 0.8,
     group = "2465 IB Computer Science") %>%
   
  #Markers for 2466 IB Information Technology in a Global Society
   addCircles(data = dplyr::filter(courses,coursecode == "2466"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#fb9a99", stroke = TRUE, fillOpacity = 0.8,
     group = "2466 IB Information Technology in a Global Society") %>%
   
   #Markers for 2470 AP Computer Science A
   addCircles(data = dplyr::filter(courses,coursecode == "2470"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#e31a1c", stroke = TRUE, fillOpacity = 0.8,
     group = "2470 AP Computer Science A") %>%
   
   #Markers for 2471 AP Computer Science AB
   addCircles(data = dplyr::filter(courses,coursecode == "2471"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#fdbf6f", stroke = TRUE, fillOpacity = 0.8,
     group = "2471 AP Computer Science AB") %>%
   
   #Markers for 2479 MYP Computer Technology
   addCircles(data = dplyr::filter(courses,coursecode == "2479"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#ff7f00", stroke = TRUE, fillOpacity = 0.8,
     group = "2479 MYP Computer Technology") %>%
   
   #Markers for 4601 Computer Operations / Computer Science
   addCircles(data = dplyr::filter(courses,coursecode == "4601"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#cab2d6", stroke = TRUE, fillOpacity = 0.8,
     group = "4601 Computer Operations/Computer Science") %>%
   
   #Markers for 4616 Computer Programming and Game Design
   addCircles(data = dplyr::filter(courses,coursecode == "4616"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#6a3d9a", stroke = TRUE, fillOpacity = 0.8,
     group = "4616 Computer Programming and Game Design") %>%
   
   #Markers for 4619 Computer Programming for Solving Applied Problems
   addCircles(data = dplyr::filter(courses,coursecode == "4619"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#ffff99", stroke = TRUE, fillOpacity = 0.8,
     group = "4619 Computer Programming for Solving Applied Problems") %>%
   
   #Markers for 4634 Exploring Computer Science
   addCircles(data = dplyr::filter(courses,coursecode == "4619"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#b15928", stroke = TRUE, fillOpacity = 0.8,
     group = "4634 Exploring Computer Science") %>%
   
   #Markers for 4647 Robotics Technologies
   addCircles(data = dplyr::filter(courses,coursecode == "4647"),~lng, ~lat, 
-    popup = paste("<b>School:</b>", courses$schoolname, "<br>", 
-                  "<b>District</b>:", courses$districtname, "<br>",
-                  "<b>Course</b>:", courses$coursetitle, "<br>"), 
+    popup = popup_info, 
     weight = 3, radius = 40,
     color = "#01665e", stroke = TRUE, fillOpacity = 0.8,
     group = "4647 Robotics Technologies") %>%
@@ -181,18 +164,21 @@ courses <- read_csv("Courses.csv")
 
 datatable(dplyr::select(courses,districtcode, schoolcode, countyname,
                         districtname, schoolname, coursecode, coursetitle),
-  extensions = c('Buttons', 'FixedHeader'), caption = "Data source:www.cde.gov", 
+  colnames = c('District Code', 'School Code','County','District',
+               'School','Course Code','Course Title'),
+  extensions = c('Buttons', 'FixedHeader'), 
+  caption = "Data source:www.cde.gov", 
+  rownames = FALSE,
   options = list(dom = 'Bfrtip',
-      buttons = list('copy', 'print', 
-      list(
-        extend = 'collection', 
-        buttons = c('csv', 'excel', 'pdf'),
-        text = 'Download'),
-        I('colvis')
-      ),
-      pageLength = 50,
-      fixedHeader = TRUE
-  ))
+    buttons = list('copy', 'print', 
+      list(extend = 'collection', 
+      buttons = c('csv', 'excel', 'pdf'),
+      text = 'Download'),
+      I('colvis')),
+    pageLength = 100,
+    fixedHeader = TRUE, 
+    searchHighlight = TRUE)
+)
 ```
 
 
