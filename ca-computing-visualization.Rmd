@@ -1,5 +1,5 @@
 ---
-title: "CSEd-Refresh: A Visualization of Computing Courses in California"
+title: "CSEd-Refresh: Computing Courses in California"
 output: 
   flexdashboard::flex_dashboard:
     theme: default
@@ -148,7 +148,7 @@ datatable(dplyr::select(courses,districtcode, schoolcode, countyname,
   colnames = c('District Code', 'School Code','County','District',
                'School','Course Code','Course Title'),
   extensions = c('Buttons', 'FixedHeader'), 
-  caption = "Data source:www.cde.gov", 
+  caption = "Data source: www.cde.gov", 
   rownames = FALSE,
   options = list(dom = 'Bfrtip',
     buttons = list('copy', 'print', 
