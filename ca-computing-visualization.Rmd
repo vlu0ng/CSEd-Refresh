@@ -3,7 +3,7 @@ title: "CSEd-Refresh: Computing Courses in California"
 output: 
   flexdashboard::flex_dashboard:
     theme: default
-    orientation: columns
+    orientation: rows
     vertical_layout: fill
     social: menu
     source_code: embed
@@ -19,6 +19,7 @@ library(DT)
 library(readr)
 
 courses <- read_csv("Courses.csv")
+descriptions <- read_csv("courseDescriptions.csv")
 topoData <- readLines("caCountiesTopo.json") %>% paste(collapse = "\n")
 popup_info <- paste("<b>School:</b>", courses$schoolname, "<br>", 
                     "<b>District</b>:", courses$districtname, "<br>",
@@ -28,21 +29,18 @@ popup_info <- paste("<b>School:</b>", courses$schoolname, "<br>",
 
 Sidebar {.sidebar}
 =======================================================================
-Use the __Visualization__ tab to explore the various computing courses offered throughout California for academic year 2014-2015. All of the courses visualized on the map are listed on the control panel on the right. You can use the radio buttons to show--or hide--the courses you are most interested in. The full course description for each of the computing courses listed here are available on the __Course Descriptions__ page. 
+Use the __Map__ page to explore the computing courses offered throughout California for academic year 2014-2015. The courses visualized on the map are listed on the panel to the right and can be toggled to show--or hide--using the radio buttons. The course description for each of the computing courses listed here are available on the __Course Descriptions__ page.
 
-Click the __Data Explorer__ tab to examine how locally-weighted estimates of neighborhood diversity by distance from the urban core has varied between the 1990, 2000, and 2010 Censuses, and view maps of these shifts over time. To learn more about the project, click the __About__ tab.
+Click the __Data__ tab to examine how locally-weighted estimates of neighborhood diversity by distance from the urban core has varied between the 1990, 2000, and 2010 Censuses, and view maps of these shifts over time. To learn more about the project, click the __About__ tab.
 
 Download CDE's courses taught data [_here_](http://www.cde.ca.gov/ds/sd/df/filesassign.asp).
-
-Application author: [Debra Richardson & Vinh Luong](http://www.ics.uci.edu)
-[Expanding Computing Educaton Pathways--California](http://www.uci.edu)
 
 ```{r}
 
 ```
 
 
-Visualization
+Map
 =======================================================================
 
 ```{r}
@@ -147,7 +145,7 @@ m
 
 ```
 
-Data Explorer
+Data
 =======================================================================
 
 ```{r}
@@ -173,11 +171,48 @@ datatable(dplyr::select(courses,districtcode, schoolcode, countyname,
 Course Descriptions
 =======================================================================
 
-###General Education
+Row {.tabset .tabset-fade}
+-------------------------------------
 
+### General Education
 
 ```{r}
+GE <- filter(descriptions, Type == "GE") %>%
+      select(matches("Code", "Course Title", "Course Description"))
 
+datatable(GE,
+  extensions = c('Buttons', 'FixedHeader'), 
+  rownames = FALSE,
+  options = list(dom = 'Bfrtip',
+    buttons = list('copy', 'print', 
+      list(extend = 'collection', 
+      buttons = c('csv', 'excel', 'pdf'),
+      text = 'Download')),
+    pageLength = 100,
+    fixedHeader = TRUE, 
+    searchHighlight = TRUE)
+)
 ```
+
+### Career Technical Education
+
+```{r}
+CTE <- filter(descriptions, Type == "CTE") %>%
+       select(matches("Code", "Course Title", "Course Description"))
+
+datatable(CTE,
+  extensions = c('Buttons', 'FixedHeader'), 
+  rownames = FALSE,
+  options = list(dom = 'Bfrtip',
+    buttons = list('copy', 'print', 
+      list(extend = 'collection', 
+      buttons = c('csv', 'excel', 'pdf'),
+      text = 'Download')),
+    pageLength = 100,
+    fixedHeader = TRUE, 
+    searchHighlight = TRUE) 
+)
+```
+
 
 
